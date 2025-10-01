@@ -19,14 +19,14 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Image x:Name="IsNativeImage" Width="24" Height="24" Stretch="Uniform" />
+                                <Label x:Name="IsNativeImage" Width="24" Height="24" />
                             </Grid>
                             <DataTemplate.Triggers>
                                 <DataTrigger Binding="{Binding IsNative}" Value="True">
-                                    <Setter TargetName="IsNativeImage" Property="Source" Value="/DataGridCustomize;component/Assets/check_box.png" />
+                                    <Setter TargetName="IsNativeImage" Property="Content" Value="a" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding IsNative}" Value="False">
-                                    <Setter TargetName="IsNativeImage" Property="Source" Value="/DataGridCustomize;component/Assets/check_box_outline.png" />
+                                    <Setter TargetName="IsNativeImage" Property="Content" Value="b" />
                                 </DataTrigger>
                             </DataTemplate.Triggers>
                         </DataTemplate>
