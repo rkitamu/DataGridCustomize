@@ -7,31 +7,48 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Resources>
+            <Style x:Key="LabelCheckBoxStyle" TargetType="CheckBox">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <Label x:Name="IsNativeLabel" Width="24" Height="24" 
+                               HorizontalContentAlignment="Center"
+                               VerticalContentAlignment="Center"/>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="IsNativeLabel" Property="Content" Value="a" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter TargetName="IsNativeLabel" Property="Content" Value="b" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Resources>
+
         <DataGrid ItemsSource="{Binding Users}" 
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  HeadersVisibility="Column">
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+
                 <DataGridTemplateColumn Header="Is Native" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Label x:Name="IsNativeImage" Width="24" Height="24" />
-                            </Grid>
-                            <DataTemplate.Triggers>
-                                <DataTrigger Binding="{Binding IsNative}" Value="True">
-                                    <Setter TargetName="IsNativeImage" Property="Content" Value="a" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding IsNative}" Value="False">
-                                    <Setter TargetName="IsNativeImage" Property="Content" Value="b" />
-                                </DataTrigger>
-                            </DataTemplate.Triggers>
+                            <CheckBox IsChecked="{Binding IsNative}" 
+                                  Style="{StaticResource LabelCheckBoxStyle}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
