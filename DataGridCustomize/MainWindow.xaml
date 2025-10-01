@@ -18,9 +18,17 @@
                 <DataGridTemplateColumn Header="Is Native" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsNative, UpdateSourceTrigger=PropertyChanged}"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center" />
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Image x:Name="IsNativeImage" Width="24" Height="24" Stretch="Uniform" />
+                            </Grid>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsNative}" Value="True">
+                                    <Setter TargetName="IsNativeImage" Property="Source" Value="/DataGridCustomize;component/Assets/check_box.png" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsNative}" Value="False">
+                                    <Setter TargetName="IsNativeImage" Property="Source" Value="/DataGridCustomize;component/Assets/check_box_outline.png" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
